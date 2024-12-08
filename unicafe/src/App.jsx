@@ -1,24 +1,38 @@
 import { useState } from 'react'
 
 const Button = ({ text, onClick }) => <button onClick={onClick}>{text}</button>
-const Statistics = ({ good, neutral, bad}) => (
+const Statistics = ({ good, neutral, bad}) => {
+  const totalVotes = good + bad + neutral;
+  const percentGood = totalVotes === 0 ? 0 : (good/totalVotes) * 100
+  const averageScore = totalVotes === 0 ? 0 : (good - bad) / totalVotes
+  return (
   <table>
     <tbody>
-      <tr>
-        <td>Good</td>
-        <td>{good}</td>
-      </tr>
-      <tr>
-        <td>Neutral</td>
-        <td>{neutral}</td>
-      </tr>
-      <tr>
-        <td>Bad</td>
-        <td>{bad}</td>
-      </tr>
+    <tr>
+      <td>Good</td>
+      <td>{good}</td>
+      <td>{percentGood}%</td>
+    </tr>
+    <tr>
+      <td>Neutral</td>
+      <td>{neutral}</td>
+    </tr>
+    <tr>
+      <td>Bad</td>
+      <td>{bad}</td>
+    </tr>
+    <tr>
+      <td>Total</td>
+      <td>{totalVotes}</td>
+    </tr>
+    <tr>
+      <td>Average</td>
+      <td>{averageScore}</td>
+    </tr>
     </tbody>
   </table>
-)
+  )
+}
 const App = () => {
   // save clicks of each button to its own state
   const [good, setGood] = useState(0)
