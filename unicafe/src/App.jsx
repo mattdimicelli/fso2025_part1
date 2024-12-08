@@ -5,6 +5,10 @@ const Statistics = ({ good, neutral, bad}) => {
   const totalVotes = good + bad + neutral;
   const percentGood = totalVotes === 0 ? 0 : (good/totalVotes) * 100
   const averageScore = totalVotes === 0 ? 0 : (good - bad) / totalVotes
+
+  if (totalVotes === 0) {
+    return <p>No feedback given</p>
+  }
   return (
   <table>
     <tbody>
