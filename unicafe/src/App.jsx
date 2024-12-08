@@ -1,7 +1,14 @@
 import { useState } from 'react'
 
 const Button = ({ text, onClick }) => <button onClick={onClick}>{text}</button>
-const Statistics = ({ good, neutral, bad}) => {
+
+const StatisticLine = ({text, value}) => (
+  <tr>
+    <td>{text}</td>
+    <td>{value}</td>
+  </tr>
+)
+const Statistics = ({ good, neutral, bad }) => {
   const totalVotes = good + bad + neutral;
   const percentGood = totalVotes === 0 ? 0 : (good/totalVotes) * 100
   const averageScore = totalVotes === 0 ? 0 : (good - bad) / totalVotes
@@ -17,22 +24,10 @@ const Statistics = ({ good, neutral, bad}) => {
       <td>{good}</td>
       <td>{percentGood}%</td>
     </tr>
-    <tr>
-      <td>Neutral</td>
-      <td>{neutral}</td>
-    </tr>
-    <tr>
-      <td>Bad</td>
-      <td>{bad}</td>
-    </tr>
-    <tr>
-      <td>Total</td>
-      <td>{totalVotes}</td>
-    </tr>
-    <tr>
-      <td>Average</td>
-      <td>{averageScore}</td>
-    </tr>
+    <StatisticLine text='Neutral' value={neutral} />
+    <StatisticLine text='Bad' value={bad} />
+    <StatisticLine text='Total' value={totalVotes} />
+    <StatisticLine text='Average' value={averageScore} />
     </tbody>
   </table>
   )
